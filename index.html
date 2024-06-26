@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+    let humanScore = 0;
+    let computerScore = 0;
+    console.log("RockPaperSisor");
+
+    function getComputerChoice (){
+
+        let a = Math.random();
+        
+
+        if (a <= 0.33) {
+            return 'sisor';
+        } else if ( a > 0.33 & a <= 0.66){
+            return 'rock';
+        } else {
+            return 'paper';
+        }
+    }
+    function getHumanChoice (){
+        let pick;
+        while(pick != 1 & pick != 2 & pick != 3) {
+            pick = prompt('1.rock 2.paper 3.sisor Write number choice');
+        }
+        switch(pick) {
+            case '1':
+                return 'rock';
+            case '2':
+                return 'paper';
+            case '3':
+                return 'sisor';    
+        }
+        return pick;
+        
+    }
+
+    function playRound (humanChoice, computerChoice) {
+        switch(humanChoice) {
+            case 'rock':
+                switch (computerChoice) {
+                    case 'rock': console.log (`none of you won, %s vs %s`, computerChoice, humanChoice); break;
+                    case 'paper': console.log (`you lost this round, %s vs %s`, computerChoice, humanChoice); computerScore++; break;
+                    case 'sisor': console.log (`You won this round %s vs %s`, computerChoice, humanChoice); humanScore++;
+                }
+                break;
+            case 'paper':
+                switch (computerChoice) {
+                    case 'paper': console.log (`none of you won, %s vs %s`, computerChoice, humanChoice); break;
+                    case 'sisor': console.log (`you lost this round, %s vs %s`, computerChoice, humanChoice); computerScore++; break;
+                    case 'rock': console.log (`You won this round %s vs %s`, computerChoice, humanChoice); humanScore++; 
+                }
+                break;
+            case 'sisor':
+                switch (computerChoice) {
+                    case 'sisor': console.log (`none of you won, %s vs %s`, computerChoice, humanChoice); break;
+                    case 'rock': console.log (`you lost this 1 round, %s vs %s`, computerChoice, humanChoice); computerScore++; break;
+                    case 'paper': console.log (`You won this 1 round %s vs %s`, computerChoice, humanChoice); humanScore++; 
+                }
+            break;
+        }
+        
+        
+    }
+    
+    function playGame () {
+        humanScore = 0;
+        computerScore = 0;
+        for (let i= 0; i < 5; i++) {
+            playRound(humanSelection, computerSelection);
+            humanSelection = NaN;
+            computerSelection = NaN;
+        }
+        console.log("final score: human %s  computer %s", humanScore, computerScore);
+
+    }
+
+    let humanSelection = getHumanChoice();
+    let computerSelection = getComputerChoice();
+
+    playGame();
+</script>
+</body>
+</html>
